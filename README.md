@@ -22,3 +22,33 @@ You have to switch to kubernet on docker by:
 kubectl config use-context docker-desktop
 ```
 
+#### 2. Create a first image on Docker
+2.1 Create the Dockerfile
+```
+# Use an official Node.js runtime as the base image
+FROM node:18
+
+# Set the working directory
+WORKDIR /usr/src/app
+
+# Copy the package.json and package-lock.json
+COPY package*.json ./
+
+# Install dependencies
+RUN npm install
+
+# Copy the rest of the application code
+COPY . .
+
+# Expose the port the app runs on
+EXPOSE 50001
+
+# Start the application
+CMD ["node", "index.js"]
+```
+2.2 Build the Docker Image
+Assume docker image name: my-node-app. The last command has a dot "."
+```
+docker build -t my-node-app .
+```
+

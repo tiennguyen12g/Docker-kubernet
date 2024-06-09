@@ -51,4 +51,36 @@ Assume docker image name: my-node-app. The last command has a dot "."
 ```
 docker build -t my-node-app .
 ```
+#### 3
+3.1 Delete pt debug
+```
+ kubectl delete pod debug
+```
+3.2 Reset container
+```
+kubectl rollout restart deployment/squid-proxy
+```
+3.3 Get all pod
+```
+kubectl get pods
+```
+3.4 Delete pod
+```
+ kubectl delete pod name-service --cascade=orphan
+ex: kubectl delete pod proxy-server-67c94876fb-q6wl5 --cascade=orphan
+```
+*Node: Kubernet will create new pod with image pull error.
+#### 4. Docker command
+4.1 Build Dockerfile
+```
+docker build -t my-proxy-server .
+```
+4.2 Run docker
+```
+docker run -d -p 30000:8888 --name proxy-server-2 --network=samsung_network --ip=192.168.102.100 my-proxy-server
+```
+Options:
+--name proxy-server-2 : create container, change "proxy-server-2" to create new container
+my-proxy-server: name of the image
+
 
